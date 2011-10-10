@@ -5,6 +5,8 @@ import framework.common.IBOReference;
 import framework.common.IBusinessObject;
 import framework.common.Record;
 import framework.common.RecordList;
+import framework.common.UndefinedFieldException;
+import framework.metamodel.IAttribute;
 
 public interface IBOService<BO extends IBusinessObject> extends IGenericService {
 

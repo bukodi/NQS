@@ -14,10 +14,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import example.pkgbase.UgyfelImplTest.Ugyfel1;
 import framework.common.Filter;
 import framework.common.Record;
-import framework.common.RecordFormat;
 import framework.common.RecordList;
 import framework.common.services.IBOService;
 import framework.common.services.NQSBase;
@@ -81,16 +79,16 @@ public class UgyfelImplTest {
 	}
 
 	static class Ugyfel1 extends Record<Ugyfel> {
-		Long UGYFEL_ID = Ugyfel.META.UGYFEL_ID.initialValue();
-		String KERESZTNEV = Ugyfel.META.KERESZTNEV.initialValue();
+		Long UGYFEL_ID = Ugyfel.UGYFEL_ID.initialValue();
+		String KERESZTNEV = Ugyfel.KERESZTNEV.initialValue();
 	};
 
 	static class Ugyfel2 extends Ugyfel1 {
 		UgyfelFelettes1 FELETTES;
 
 		static class UgyfelFelettes1 extends Record<Ugyfel> {
-			String VEZETEKNEV = Ugyfel.META.VEZETEKNEV.initialValue();
-			String KERESZTNEV = Ugyfel.META.KERESZTNEV.initialValue();
+			String VEZETEKNEV = Ugyfel.VEZETEKNEV.initialValue();
+			String KERESZTNEV = Ugyfel.KERESZTNEV.initialValue();
 		};
 	};
 

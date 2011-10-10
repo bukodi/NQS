@@ -14,41 +14,63 @@ import framework.server.ServiceManager;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-@DiscriminatorValue( "KiemeltUgyfel")
-@PrimaryKeyJoinColumn(name="KIEMELTUGYFEL_ID") // Currently not working.  See: https://bugs.eclipse.org/bugs/show_bug.cgi?id=330628
+@DiscriminatorValue("KiemeltUgyfel")
+@PrimaryKeyJoinColumn(name = "KIEMELTUGYFEL_ID")
+// Currently not working. See:
+// https://bugs.eclipse.org/bugs/show_bug.cgi?id=330628
 class KiemeltUgyfelImpl extends UgyfelImpl implements KiemeltUgyfel {
 	
+	protected Long KIEMELTUGYFEL_ID;
 	
+	@Override
+	public Long getKIEMELTUGYFEL_ID() {
+		return KIEMELTUGYFEL_ID;
+	}
 
 	@Override
-	public <V> V get(KiemeltUgyfel.Attr<V> field)
-			throws UndefinedFieldException {
+	public void setKIEMELTUGYFEL_ID(Long kiemeltugyfel_id) {
+		this.KIEMELTUGYFEL_ID = kiemeltugyfel_id;
+	}
+
+	protected String SZEMELYES_UGYINTEZO;
+	
+	@Override
+	public String getSZEMELYES_UGYINTEZO() {
+		return SZEMELYES_UGYINTEZO;
+	}
+
+	@Override
+	public void setSZEMELYES_UGYINTEZO(String szemelyes_ugyintezo) {
+		this.SZEMELYES_UGYINTEZO = szemelyes_ugyintezo;
+	}
+	
+	protected Boolean UTOLSO_TALALKOZO;
+
+	@Override
+	public Boolean getUTOLSO_TALALKOZO() {
+		return UTOLSO_TALALKOZO;
+	}
+
+	@Override
+	public void setUTOLSO_TALALKOZO(Boolean utolso_talalkozo) {
+		this.UTOLSO_TALALKOZO = utolso_talalkozo;
+	}
+
+	@Override
+	public String getTELJESNEV() {
+		return getVEZETEKNEV() + " " + getKERESZTNEV();
+	}
+
+	@Override
+	public String sayHello5(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public <V> void set(KiemeltUgyfel.Attr<V> field, V value)
-			throws UndefinedFieldException {
+	public String sayHello6(String name) {
 		// TODO Auto-generated method stub
+		return null;
 	}
-
-	/*** Delegating methods to implementation methods ***/
-	protected transient KiemeltUgyfel impl = (KiemeltUgyfel) ServiceManager
-			.getImpl(KiemeltUgyfel.class);
-
-	//@formatter:off
-	public String sayHello1(String name) { return impl.sayHello1(name);	}
-	public String sayHello2(String name) { return impl.sayHello2(name);	}
-	public String sayHello3(String name) { return impl.sayHello3(name);	}
-	public String sayHello4(String name) { return impl.sayHello4(name);	}
-	public String sayHello5(String name) { return impl.sayHello5(name);	}
-	public String sayHello6(String name) { return impl.sayHello6(name);	}
-	@Override public Long getUGYFEL_ID() { return impl.getUGYFEL_ID(); }
-	@Override public String getKERESZTNEV() { return impl.getKERESZTNEV(); }
-	@Override public void setKERESZTNEV(String keresztnev) { impl.setKERESZTNEV(keresztnev); }
-	@Override public String getVEZETEKNEV() { return getVEZETEKNEV(); }
-	@Override public void setVEZETEKNEV(String vezeteknev) { impl.setVEZETEKNEV(vezeteknev); }
-	@Override public String getTELJESNEV() { return impl.getTELJESNEV(); }
-	//@formatter:on
 
 }

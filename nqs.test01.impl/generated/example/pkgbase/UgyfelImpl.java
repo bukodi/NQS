@@ -8,51 +8,47 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
-import framework.common.UndefinedFieldException;
-import framework.metamodel.IAttribute;
-
 @MappedSuperclass
 @Access( AccessType.FIELD)
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class UgyfelImpl implements Ugyfel {
 			
-	@Override
-	public <V> V get(Ugyfel.Attr<V> field)
-			throws UndefinedFieldException {
-		if( field.equals(ID) ) 
-			return (V)getPrimaryKey();
-		else if ( field.equals(KERESZTNEV) )
-			return (V)getKERESZTNEV();
-		else if ( field.equals(VEZETEKNEV) )
-			return (V)getVEZETEKNEV();
-		else
-			throw new UndefinedFieldException((IAttribute<?, ?>) field);
-	}
-
-	@Override
-	public <V> void set(Ugyfel.Attr<V> field, V value)
-			throws UndefinedFieldException {		
-		if( field.equals(ID) ) 
-			ID = (Long) value;
-		else if ( field.equals(KERESZTNEV) )
-			setKERESZTNEV((String) value);
-		else if ( field.equals(VEZETEKNEV) )
-			setVEZETEKNEV((String) value);
-		else
-			throw new UndefinedFieldException((IAttribute<?, ?>) field);
-	}
-
 	@Id
 	@Column(name = "UGYFEL_ID")
-	protected Long ID;
+	protected Long UGYFEL_ID;
+	
+	@Override
+	public Long getUGYFEL_ID() {
+		return UGYFEL_ID;
+	}
+
+	protected String VEZETEKNEV; 
+	
+	@Override
+	public String getVEZETEKNEV() {
+		return VEZETEKNEV;
+	}
+
+	@Override
+	public void setVEZETEKNEV(String vezeteknev) {
+		this.VEZETEKNEV = vezeteknev;		
+	}
 	
 	protected String KERESZTNEV;
 
-	protected String VEZETEKNEV; 
-		
 	@Override
-	public final Object getPrimaryKey() {
-		return getUGYFEL_ID();
+	public String getKERESZTNEV() {
+		return KERESZTNEV;
+	}
+
+	@Override
+	public void setKERESZTNEV(String keresztnev) {
+		this.KERESZTNEV = keresztnev;		
+	}
+
+	@Override
+	public String getTELJESNEV() {
+		return getVEZETEKNEV() + " " + getKERESZTNEV();
 	}
 
 	@Override
@@ -75,28 +71,4 @@ public abstract class UgyfelImpl implements Ugyfel {
 		return "Hello4 - BaseImpl";
 	}
 
-	@Override
-	public Long getUGYFEL_ID() {
-		return ID;
-	}
-
-	@Override
-	public String getKERESZTNEV() {
-		return KERESZTNEV;
-	}
-
-	@Override
-	public void setKERESZTNEV(String keresztnev) {
-		KERESZTNEV = keresztnev;		
-	}
-
-	@Override
-	public String getVEZETEKNEV() {
-		return VEZETEKNEV;
-	}
-
-	@Override
-	public void setVEZETEKNEV(String vezeteknev) {
-		VEZETEKNEV = vezeteknev;		
-	}
 }

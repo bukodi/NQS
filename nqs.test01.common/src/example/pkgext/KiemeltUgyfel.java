@@ -1,47 +1,31 @@
 package example.pkgext;
 
 import example.pkgbase.Ugyfel;
-import example.pkgbase.Ugyfel.Attr;
-import framework.annotations.NotNull;
-import framework.common.UndefinedFieldException;
-import framework.metamodel.IAttribute;
 import framework.metamodel.IPersistentField;
-import framework.metamodel.IPrimaryKey;
 import framework.metamodel.staticc.PersistentField;
-import framework.metamodel.staticc.PrimaryKey;
 
 public interface KiemeltUgyfel extends Ugyfel {
 
-	public interface Attr<V> extends IAttribute<KiemeltUgyfel, V> {
-		
-	};
+	final static IPersistentField<KiemeltUgyfel, Long> KIEMELTUGYFEL_ID = new PersistentField<KiemeltUgyfel, Long>(
+			KiemeltUgyfel.class, "KIEMELTUGYFEL_ID", Long.class); //$NON-NLS-1$
 
-	public <V> V get(Attr<V> field)
-			throws UndefinedFieldException;
+	Long getKIEMELTUGYFEL_ID();
 
-	public <V> void set(Attr<V> field, V value)
-			throws UndefinedFieldException;
+	void setKIEMELTUGYFEL_ID(Long kiemeltugyfel_id);
 
-	public final static class META extends Ugyfel.META {
+	final static IPersistentField<KiemeltUgyfel, String> SZEMELYES_UGYINTEZO = new PersistentField<KiemeltUgyfel, String>(
+			KiemeltUgyfel.class, "SZEMELYES_UGYINTEZO", String.class); //$NON-NLS-1$
 
-		public META() {
-			super(KiemeltUgyfel.class);
-		}
+	String getSZEMELYES_UGYINTEZO();
 
-		public final static IPersistentField<KiemeltUgyfel, Long> KIEMELTUGYFEL_ID = new PersistentField<KiemeltUgyfel, Long>(
-				KiemeltUgyfel.class, "KIEMELTUGYFEL_ID", Long.class); //$NON-NLS-1$
+	void setSZEMELYES_UGYINTEZO(String szemelyes_ugyintezo);
 
-		public final static IPersistentField<KiemeltUgyfel, String> SZEMELYES_UGYINTEZO = new PersistentField<KiemeltUgyfel, String>(
-				KiemeltUgyfel.class, "SZEMELYES_UGYINTEZO", String.class); //$NON-NLS-1$
+	final static IPersistentField<KiemeltUgyfel, Boolean> UTOLSO_TALALKOZO = new PersistentField<KiemeltUgyfel, Boolean>(
+			KiemeltUgyfel.class, "UTOLSO_TALALKOZO", Boolean.class); //$NON-NLS-1$
 
-		public final static IPersistentField<KiemeltUgyfel, Boolean> UTOLSO_TALALKOZO = new PersistentField<KiemeltUgyfel, Boolean>(
-				KiemeltUgyfel.class, "UTOLSO_TALALKOZO", Boolean.class); //$NON-NLS-1$
+	Boolean getUTOLSO_TALALKOZO();
 
-		@SuppressWarnings("unchecked")
-		private final static IPrimaryKey<KiemeltUgyfel> _primaryKey_ = new PrimaryKey<KiemeltUgyfel>(
-				KiemeltUgyfel.class, KIEMELTUGYFEL_ID);
-
-	}
+	void setUTOLSO_TALALKOZO(Boolean utolso_talalkozo);
 
 	public static class INSTANCES {
 		static KiemeltUgyfel KOVACS_JANOS;
