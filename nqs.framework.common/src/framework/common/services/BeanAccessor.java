@@ -4,7 +4,7 @@ import framework.common.IBusinessObject;
 import framework.common.UndefinedFieldException;
 import framework.metamodel.IAttribute;
 
-public interface Accessor<BO extends IBusinessObject> {
+public interface BeanAccessor<BO extends IBusinessObject> {
 	
 	<V> V get( BO object, IAttribute<? super BO, V> attr ) throws UndefinedFieldException;
 	

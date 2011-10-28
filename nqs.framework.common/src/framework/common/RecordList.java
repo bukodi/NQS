@@ -2,17 +2,32 @@ package framework.common;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
+import java.util.List;
+
+import framework.annotations.NotNull;
 
 
-public class RecordList<R extends Record> implements Iterable<R>{
+public class RecordList<BO extends IBusinessObject> extends ArrayList<Record<BO>>{
 	
-	private final ArrayList<R> records = new ArrayList<R>();
+	private final RecordFormat<BO> recordFormat;
 	
-	@Override
-	public Iterator<R> iterator() {
-		return records.listIterator();
+	public RecordList(@NotNull RecordFormat<BO> recordFormat ) {		
+		this.recordFormat = recordFormat;		
+	}
+	
+	public RecordFormat<BO> getFormat() {
+		return recordFormat;
+	}
+	
+	public Record<BO> newRecord() {
+		Record<BO> newRecord = new Record<BO>( recordFormat );
+		add(newRecord);
+		return newRecord;
+	}
+	public Record<BO> newRecord(int index ) {
+		Record<BO> newRecord = new Record<BO>( recordFormat );
+		add(index, newRecord);
+		return newRecord;
 	}
 
-	
 }

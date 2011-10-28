@@ -14,8 +14,11 @@ public class Record<BO extends IBusinessObject> implements
 	private final RecordFormat<BO> recordFormat;
 	private final Map<IAttribute<? super BO, ?>, Object> values = new HashMap<IAttribute<? super BO, ?>, Object>();
 
+	
 	protected Record() {
-		this(new RecordFormat<BO>(true, false, null));
+		//Class<? extends Record<BO>> clazz = null;
+		recordFormat = RecordFormat.formatOf((Class<? extends Record<BO>>) getClass());
+		//null;
 	}
 
 	public Record( RecordFormat<BO> recordFormat ) {
@@ -26,26 +29,34 @@ public class Record<BO extends IBusinessObject> implements
 			throws UndefinedFieldException {
 		if (field == null)
 			throw new NullPointerException("field");
+		if (!recordFormat.attributes.contains(field)) {
+			if (recordFormat.throwExceptionOnInvalidGet)
+				throw new UndefinedFieldException(field);
+			else
+				return field.initialValue();
+		}
+
 		if (!values.containsKey(field)) {
 			if (recordFormat.throwExceptionOnInvalidGet)
 				throw new UndefinedFieldException(field);
 			else
-				return null;
-		}
-
-		return (V) values.get(field);
+				return field.initialValue();
+		} else {
+			return (V) values.get(field);			
+		}		
 	}
 
-	public <V> void set(@NotNull IAttribute<? super BO, V> field, V value)
+	public <V> Record<BO> set(@NotNull IAttribute<? super BO, V> field, V value)
 			throws UndefinedFieldException {
 		if (field == null)
 			throw new NullPointerException("field");
-		if (!values.containsKey(field))
-			if (recordFormat.addAttributeOnInvaidSet)
-				recordFormat.attributes.add(field);
-			else
-				throw new UndefinedFieldException(field);
+		if ( ! recordFormat.attributes.contains(field) )
+			throw new UndefinedFieldException(field);
+				
 		values.put(field, value);
+		
+		// For chained call
+		return this; 
 	}
 
 	@Override

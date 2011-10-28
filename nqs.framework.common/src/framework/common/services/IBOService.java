@@ -1,17 +1,17 @@
 package framework.common.services;
 
 import framework.common.Filter;
+import framework.common.RecordList;
 import framework.common.IBOReference;
 import framework.common.IBusinessObject;
 import framework.common.Record;
-import framework.common.RecordList;
-import framework.common.UndefinedFieldException;
-import framework.metamodel.IAttribute;
+import framework.common.RecordFormat;
+import framework.common.TypedRecordList;
 
 public interface IBOService<BO extends IBusinessObject> extends IGenericService {
 
-	<R extends Record<BO>> Iterable<R> query( Class<R> returnType, Filter<BO> filter);
+	RecordList<BO> query( RecordFormat<BO> recordFormat, Filter<BO> filter);
 	
-	<R extends Record<BO>> Iterable<IBOReference<BO>> store( Iterable<R> records );
+	Iterable<IBOReference<BO>> store( RecordList<BO> records );
 
 }
