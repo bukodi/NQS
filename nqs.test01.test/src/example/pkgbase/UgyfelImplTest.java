@@ -16,39 +16,49 @@ import org.junit.Test;
 
 import framework.common.Filter;
 import framework.common.Record;
+import framework.common.RecordFormat;
 import framework.common.RecordList;
 import framework.common.services.IBOService;
 import framework.common.services.NQSBase;
 
 public class UgyfelImplTest {
 
-	EntityManager em;
-	EntityManagerFactory emf;
 
 	@Before
 	public void setUp() throws Exception {
-		Map<String, String> properties = new HashMap<String, String>();
+		/*Map<String, String> properties = new HashMap<String, String>();
         properties.put("javax.persistence.jdbc.driver", "oracle.jdbc.driver.OracleDriver");
         properties.put("javax.persistence.jdbc.url", "jdbc:oracle:thin:@127.0.0.1:1521:XE");
         properties.put("javax.persistence.jdbc.user", "test02");
         properties.put("javax.persistence.jdbc.password", "test02");
 		
 		emf = Persistence.createEntityManagerFactory("nqs.test01.server", properties);		
-		em = emf.createEntityManager();		
+		em = emf.createEntityManager();*/		
 	}		
 
 	@After
 	public void tearDown() throws Exception {
-		em.close();
+		//em.close();
+	}
+
+	private final class UgyfelNev extends Record<Ugyfel>{
+		String VEZETEKNEV;
+		String KERESZTNEV;
 	}
 	
+	@Test
+	public void testUgyfelQuery() throws IOException {
+		UgyfelService ugyfelSvc = NQSBase.getService(UgyfelService.class);
+		Iterable<UgyfelNev> result = ugyfelSvc.query( RecordFormat.formatOf( UgyfelNev.class), null);
+	}
+
 	@Test
 	public void test01() throws IOException {
 		UgyfelService svc1 = NQSBase.getService(UgyfelService.class);
 		//Class<Ugyfel> clazz = svc1.getServedType();
 		System.out.println( svc1);
 		
-		RecordList<Ugyfel1> ds = new RecordList<Ugyfel1>();
+		RecordList<Ugyfel,Ugyfel1> ds = new RecordList<Ugyfel,Ugyfel1>( Ugyfel1.class);
 		
 		
 		IBOService<Ugyfel> svc2 = NQSBase.getBOService(Ugyfel.class);
@@ -61,7 +71,7 @@ public class UgyfelImplTest {
 	public void bulkInsert() throws IOException {
 		UgyfelService svc1 = NQSBase.getService(UgyfelService.class);
 
-		List<Ugyfel1> list = new ArrayList<Ugyfel1>();
+		/*List<Ugyfel1> list = new ArrayList<Ugyfel1>();
 		for( int i = 0; i < 10; i++ ) {
 			Ugyfel1 uf1 = new Ugyfel1();
 			uf1.KERESZTNEV = "Giz";
@@ -70,7 +80,7 @@ public class UgyfelImplTest {
 		svc1.store(list);
 		
 		RecordList<Ugyfel1> ds = new RecordList<UgyfelImplTest.Ugyfel1>();
-		
+		*/
 		
 		IBOService<Ugyfel> svc2 = NQSBase.getBOService(Ugyfel.class);
 		System.out.println( svc2); 
@@ -100,9 +110,9 @@ public class UgyfelImplTest {
 		Filter<Ugyfel> filter = null;
 		svc2.query(null, filter );
 		
-		RecordList<Ugyfel1> dsUf1 = new RecordList<Ugyfel1>();
+		//RecordList<Ugyfel1> dsUf1 = new RecordList<Ugyfel1>();
 		
-		svc2.store(dsUf1);
+		//svc2.store(dsUf1);
 	}
 
 }

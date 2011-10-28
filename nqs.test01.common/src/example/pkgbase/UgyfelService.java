@@ -2,13 +2,13 @@ package example.pkgbase;
 
 import framework.annotations.NotNull;
 import framework.common.UndefinedFieldException;
-import framework.common.services.Accessor;
+import framework.common.services.BeanAccessor;
 import framework.common.services.IBOService;
 import framework.metamodel.IAttribute;
 
 public interface UgyfelService extends IBOService<Ugyfel>{
 		
-	final static Accessor<Ugyfel> _ACCESSOR_ = new Accessor<Ugyfel>() {
+	final static BeanAccessor<Ugyfel> _BEAN_ACCESSOR_ = new BeanAccessor<Ugyfel>() {
 
 		@SuppressWarnings("unchecked")
 		@Override

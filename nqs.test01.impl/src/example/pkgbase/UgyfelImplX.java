@@ -3,7 +3,7 @@ package example.pkgbase;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
+@Entity( name= "Ugyfel")
 @Table( name = "Ugyfel")
 class UgyfelImplX extends UgyfelImpl  {
 
